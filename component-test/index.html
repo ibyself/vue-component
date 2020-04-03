@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test">
+        <button-counter></button-counter>
+        <hr>
+        <blog-post v-for="(post,index) in posts" :key="post.id" :title="post.title"></blog-post>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+    <script>
+        Vue.component('button-counter', {
+            data: function () {
+                return {
+                count: 0
+                }
+            },
+            template: '<button v-on:click="count++">你点击了 {{ count }} 次。</button>'
+        })
+        Vue.component('blog-post',{
+            props:['title'],
+            template:'<div><h1>{{title}}</h1><button-counter></button-counter></div>'
+        })
+        new Vue({
+            el:'#test',
+            data(){
+                return {
+                    posts:[
+                    { id: 1, title: '我的 Vue 旅程' },
+                    { id: 2, title: '用 Vue 写博客' },
+                    { id: 3, title: 'Vue 如此有趣' }
+                    ]
+                }
+            }
+        })
+    </script>
+</body>
+</html>

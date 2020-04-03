@@ -1,20 +1,59 @@
 <template>
-    <div>{{msg}}</div>
+    <div class="todo-container">
+        <div class="todo-wrap">
+            <Header :addTodo="addTodo"/>
+            <List :todos="todos" :deleteTodo="deleteTodo"/>
+            <Footer :todos="todos" :checkAllTodos="checkAllTodos" :clearCompleteTodos="clearCompleteTodos"/>
+        </div>
+    </div>
 </template>
 
 <script>
+    import Header from './components/Header'
+    import List from '@comps/List'
+    import Footer from '@comps/Footer'
     export default{
         //name:'App',
-        data (){
-            return{
-                msg:'First Vue Component'
+        data(){
+            return {
+                todos:[
+                    {id:1,title:'A',complete:false},
+                    {id:3,title:'B',complete:true},
+                    {id:4,title:'C',complete:false},
+                ]
             }
+        },
+        methods:{
+            addTodo(todo){
+                this.todos.unshift(todo)
+            },
+            deleteTodo(index){
+                this.todos.splice(index,1)
+            },
+            clearCompleteTodos(){
+                this.todos=this.todos.filter(todo=>!todo.complete)
+            },
+            checkAllTodos(isCheck){
+                this.todos.forEach(todo=>todo.complete=isCheck)
+            }
+
+        },
+        components:{//局部注册组件
+            Header,
+            List,
+            Footer
         }
     }
 </script>
 
 <style>
-    div{
-        color:skyblue;
+    .todo-container {
+        width: 600px;
+        margin: 0 auto;
+    }
+    .todo-container .todo-wrap {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
     }
 </style>
