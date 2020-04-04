@@ -93,5 +93,7 @@ module.exports={
             '@comps':resolve('src/components'),
             'vue$': 'vue/dist/vue.esm.js',
         }
-    }
+    },
+    //配置开启source-map调试
+    devtool: 'cheap-module-eval-source-map',
 }

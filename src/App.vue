@@ -1,59 +1,50 @@
 <template>
-    <div class="todo-container">
-        <div class="todo-wrap">
-            <Header :addTodo="addTodo"/>
-            <List :todos="todos" :deleteTodo="deleteTodo"/>
-            <Footer :todos="todos" :checkAllTodos="checkAllTodos" :clearCompleteTodos="clearCompleteTodos"/>
+    <div>
+        <header class="site-header jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h1>请发表对Vue的评论</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="container">
+            <Add :addComment="addComment"/>
+            <List :commentList="commentList" :deleteComment="deleteComment"/>
         </div>
     </div>
 </template>
 
-<script>
-    import Header from './components/Header'
-    import List from '@comps/List'
-    import Footer from '@comps/Footer'
-    export default{
-        //name:'App',
+<script  type="text/ecmascript-6">
+    import Add from './components/Add'
+    import List from './components/List'
+    export default {
         data(){
             return {
-                todos:[
-                    {id:1,title:'A',complete:false},
-                    {id:3,title:'B',complete:true},
-                    {id:4,title:'C',complete:false},
+                commentList:[
+                    {id:1,username:'aa',content:'bb'},
+                    {id:3,username:'cc',content:'dd'},
+                    {id:5,username:'ee',content:'ff'},
                 ]
             }
         },
         methods:{
-            addTodo(todo){
-                this.todos.unshift(todo)
+            deleteComment(index){
+                this.commentList.splice(index,1)
             },
-            deleteTodo(index){
-                this.todos.splice(index,1)
-            },
-            clearCompleteTodos(){
-                this.todos=this.todos.filter(todo=>!todo.complete)
-            },
-            checkAllTodos(isCheck){
-                this.todos.forEach(todo=>todo.complete=isCheck)
+            addComment(comment){
+                this.commentList.unshift(comment)
             }
-
         },
-        components:{//局部注册组件
-            Header,
-            List,
-            Footer
+        components:{
+            Add,
+            List
         }
-    }
+    };
 </script>
 
-<style>
-    .todo-container {
-        width: 600px;
-        margin: 0 auto;
-    }
-    .todo-container .todo-wrap {
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
+<style scoped>
+
+ 
 </style>

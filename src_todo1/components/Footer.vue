@@ -27,7 +27,6 @@
           return this.todos.length===this.completeSize &&this.completeSize>0
         },
         set(value){
-            console.log(value)
             this.checkAllTodos(value)
         }
       }
