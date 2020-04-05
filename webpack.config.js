@@ -80,6 +80,13 @@ module.exports={
     devServer:{
         open:true,//自动打开浏览器
         quiet:true,//不做太多日志输出
+        proxy: {
+            "/api": {
+              target: "http://localhost:4000",
+              pathRewrite: {"^/api" : ""},
+              changeOrigin: true
+            }
+          }
     },
     //模块引入解析
     resolve:{
