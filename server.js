@@ -2,11 +2,11 @@ const express=require('express')
 const axios=require('axios')
 const app=express()
 app.get('/repositories/:q',(req,res)=>{
-    const q=req.param.q
+    const q=req.params.q
     axios({
         method:'GET',
         url:'https://api.github.com/search/repositories',
-        param:{
+        params:{
             q,
             sort:'stars'
         }

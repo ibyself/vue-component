@@ -7,5 +7,8 @@ Vue.use(VueResource)
 
 new Vue({
     el:'#root',
-    render:h=>h(App)
+    render:h=>h(App),
+    beforeCreate(){
+        Vue.prototype.$eventBus=this
+    }
 })
