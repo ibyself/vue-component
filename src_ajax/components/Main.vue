@@ -5,8 +5,8 @@
         <h2 v-else-if="errMsg">{{errMsg}}</h2>
         <div class="row" v-else>
             <div class="card" v-for="(user,index) in users" :key="index">
-                <a href="user.url" target="_blank">
-                <img src="user.avatar_url" style='width: 100px'/>
+                <a :href="user.url" target="_blank">
+                <img :src="user.avatar_url" style='width: 100px'/>
                 </a>
                 <p class="card-text">{{user.username}}</p>
             </div>
@@ -26,11 +26,12 @@
             }
         },
         mounted(){
-            this.$eventBus.$on('search',(searchName)=>{
+            this.$eventBus.$on('search',async(searchName)=>{
                 this.isFirst=false
                 this.loading=true
-                axios.get('https://api.github.com/search/users',{params:{q:searchName}})
-                .then((response)=>{
+                
+                try{
+                    const response=await axios.get('https://api.github.com/search/users',{params:{q:searchName}})
                     const result=response.data
                     const users=result.items.map(item=>({
                         username:item.login,
@@ -39,11 +40,30 @@
                     }))
                     this.loading=false
                     this.users=users
-                })
-                .catch((err)=>{
+                }catch(error){
+                    this.errMsg='请求出错:'+error.massage
                     this.loading=false
-                    this.errMsg='请求出错：'+err.message
-                })
+                }
+
+
+
+
+
+                // axios.get('https://api.github.com/search/users',{params:{q:searchName}})
+                // .then((response)=>{
+                //     const result=response.data
+                //     const users=result.items.map(item=>({
+                //         username:item.login,
+                //         url:item.html_url,
+                //         avatar_url:item.avatar_url
+                //     }))
+                //     this.loading=false
+                //     this.users=users
+                // })
+                // .catch((err)=>{
+                //     this.loading=false
+                //     this.errMsg='请求出错：'+err.message
+                // })
             })
         }
     };

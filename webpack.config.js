@@ -21,7 +21,8 @@ module.exports={
     //出口
     output:{
         path:resolve('dist'),//dist的绝对路径 所有打包生成文件的基础路径
-        filename:'static/js/[name].bundle.js'
+        filename:'static/js/[name].bundle.js',
+        publicPath:'/'
     },
     //模块打包器
     module:{
@@ -86,7 +87,8 @@ module.exports={
               pathRewrite: {"^/api" : ""},
               changeOrigin: true
             }
-          }
+        },
+        historyApiFallback: true
     },
     //模块引入解析
     resolve:{
