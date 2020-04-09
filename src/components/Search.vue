@@ -19,8 +19,8 @@
           search(){
             const searchName=this.searchName.trim()
             if(searchName){
-                this.$eventBus.$emit('search',searchName)
-                this.searchName=''
+                this.$store.dispatch('search',searchName)
+                this.searchName = ''
             }
           }
       }

@@ -42,7 +42,12 @@ module.exports={
                   options: {
                     presets: ['@babel/preset-env'],//配置预设包
                     plugins:[//配置预设包之外的插件包
-
+                        ["babel-plugin-component", 
+                            {
+                              "libraryName": "mint-ui",
+                              "style": true
+                            }
+                        ]
                     ]
                   }
                 }
